@@ -1,0 +1,32 @@
+<?php
+
+$title = 'Editar Categoria';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$nomeCat = $form->get('nome_categoria');
+$nomeCat->setAttribute('class', 'form-control');
+$nomeCat->setAttribute('placeholder', 'Nome da Categoria');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('categoria', [
+    'action' => 'cadastrar',
+    'id_categoria_planejamento'     => $id,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+    <?= $this->formLabel($nomeCat) ?>
+    <?= $this->formElement($nomeCat) ?>
+    <?= $this->formElementErrors()->render($nomeCat, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id_categoria_planejamento'));
+echo $this->form()->closeTag();

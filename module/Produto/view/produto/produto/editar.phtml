@@ -1,0 +1,53 @@
+<?php
+
+$title = 'Editar Produto';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+
+$nomeProd = $form->get('nome_produto');
+$nomeProd->setAttribute('class', 'form-control');
+$nomeProd->setAttribute('placeholder', 'Nome do Produto');
+
+$catProd = $form->get('id_categoria_produto');
+$catProd->setAttribute('class', 'form-control');
+$catProd->setAttribute('placeholder', 'Categoria do Produto');
+
+$vlProd = $form->get('valor_produto');
+$vlProd->setAttribute('class', 'form-control');
+$vlProd->setAttribute('placeholder', 'Nome do Produto');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('produto', [
+    'action' => 'cadastrar',
+    'id_produto'     => $id,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+    <?= $this->formLabel($nomeProd) ?>
+    <?= $this->formElement($nomeProd) ?>
+    <?= $this->formElementErrors()->render($nomeProd, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($catProd) ?>
+    <?= $this->formElement($catProd) ?>
+    <?= $this->formElementErrors()->render($catProd, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($vlProd) ?>
+    <?= $this->formElement($vlProd) ?>
+    <?= $this->formElementErrors()->render($vlProd, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id_produto'));
+echo $this->form()->closeTag();
